@@ -5,7 +5,7 @@
 
 #include <iostream>
 #include <cstring>
-#include <math.h>
+#include <cmath>
 
 class Check
 {
