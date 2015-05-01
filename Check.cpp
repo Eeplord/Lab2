@@ -107,7 +107,7 @@ std::string convertIntToString(int digit)
 		
 		if(ones != 0)
 		{
-			message = message + "-";
+			message += "-";
 		}
 
 		digit = ones;
