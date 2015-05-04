@@ -15,7 +15,7 @@ Check::Check(std::string name, double amount, int day, int month, int year)
 
 std::ostream& operator<<(std::ostream& out, Check const& check)
 {
-	out << "\t\t\t\t\t\t\t\t\t\tDate " << check.month_ << "\\" << check.day_ <<
+	out << "\t\t\t\t\t\t\t\t\tDate " << check.month_ << "\\" << check.day_ <<
 		"\\" << check.year_ <<	std::endl;
 
 	out << "Pay to the order of " << check.name_ << std::endl;
@@ -24,7 +24,7 @@ std::ostream& operator<<(std::ostream& out, Check const& check)
 	dollars = floor(check.amount_);
 	cents = check.amount_ * 100 - dollars * 100;
 
-	out << "\t\t\t\t\t\t\t\t\t\t$" << dollars << ".";
+	out << "\t\t\t\t\t\t\t\t\t$" << dollars << ".";
 
 	if(cents < 10)
 	{
@@ -58,10 +58,7 @@ std::ostream& operator<<(std::ostream& out, Check const& check)
 		out << "Dollars and ";
 	}	
 
-	if(cents != 0)
-	{
-		out <<  cents << " Cents";
-	}
+	out <<  cents << " Cents";
 
 	out << std::endl;
 
