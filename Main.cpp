@@ -4,6 +4,7 @@
 #include <cstring>
 
 #include "Check.h"
+#include "Worker.h"
 
 void writeCheck();
 
