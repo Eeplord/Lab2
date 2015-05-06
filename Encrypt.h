@@ -1,3 +1,6 @@
+// CIS22B
+// Lab2
+// Cameron March
 // Encrypt.h
 
 #ifndef ENCRYPT_H

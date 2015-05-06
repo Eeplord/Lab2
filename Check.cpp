@@ -1,9 +1,15 @@
+// CIS22B
+// Lab2
+// Cameron March
 // Check.cpp
 
+// Include our header
 #include "Check.h"
 
+// Function prototype for helper function
 std::string convertIntToString(int digit);
 
+// Constructor for our check object
 Check::Check(std::string name, double amount, int day, int month, int year)
 {
 	name_ = name;
@@ -13,6 +19,7 @@ Check::Check(std::string name, double amount, int day, int month, int year)
 	year_ = year;
 }
 
+// Overwriting the << operator so we can print object directly
 std::ostream& operator<<(std::ostream& out, Check const& check)
 {
 	out << "\t\t\t\t\t\t\t\t\tDate " << check.month_ << "\\" << check.day_ <<
@@ -65,6 +72,8 @@ std::ostream& operator<<(std::ostream& out, Check const& check)
 	return out;
 }
 
+// Helper function that turns a one to two digit number
+// into its string representation
 std::string convertIntToString(int digit)
 {
 	std::string message = "";

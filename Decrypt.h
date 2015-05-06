@@ -1,3 +1,6 @@
+// CIS22B
+// Lab2
+// Cameron March
 // Decrypt.h
 
 #ifndef DECRYPT_H
