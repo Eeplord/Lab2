@@ -124,7 +124,7 @@ void payWorker()
 
 	if (worker.isHourly)
 	{
-		int amount;
+		double amount;
 		loop = true;
 		while (loop)
 		{
@@ -165,16 +165,52 @@ void payWorker()
 				loop = false;
 			}
 		}
+
 		std::cout << worker.name << " should be paid $" <<
 			(worker.pay.hourly.rate * worker.pay.hourly.hours) <<
 			std::endl;
 	}
 	else
 	{
-		std::cout << "Enter their salary: " << std::endl;
-		std::cin >> worker.pay.salary.salary;
+		double amount;
+		loop = true;
+		while (loop)
+		{
+			std::cout << "Enter their salary: " << std::endl;
+			std::cin >> amount;
 
-		std::cout << "Enter their bonus: " << std::endl;
-		std::cin >> worker.pay.salary.bonus;
+			if (amount < 0)
+			{
+				std::cout << "Salary cannot be negative!" <<
+					std::endl;
+			}
+			else
+			{
+				worker.pay.salary.salary = amount;
+				loop = false;
+			}
+		}
+
+		loop = true;
+		while (loop)
+		{
+			std::cout << "Enter their bonus: " << std::endl;
+			std::cin >> amount;
+
+			if (amount < 0)
+			{
+				std::cout << "Bonus cannot be negative!" <<
+					std::endl;
+			}
+			else
+			{
+				worker.pay.salary.bonus = amount;
+				loop = false;
+			}
+		}
+
+		std::cout << worker.name << " should be paid $" <<
+			(worker.pay.salary.salary + worker.pay.salary.bonus) <<
+			std::endl;
 	}
 }
