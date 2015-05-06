@@ -4,14 +4,17 @@
 #include <cstring>
 
 #include "Check.h"
+#include "Encrypt.h"
+#include "Decrypt.h"
 #include "Worker.h"
 
 void writeCheck();
+void payWorker();
 
 int main()
 {
 	bool quit = false;
-	std::string commands = "[1] Write a Check\n[q] Quit";
+	std::string commands = "[1] Write a Check\n[2] Hourly/Salary Workers\n[3] Encrypt File\n[4] Decrypt File\n[q] Quit";
 	char input;
 
 	while(!quit)
@@ -25,7 +28,21 @@ int main()
 				writeCheck();
 				break;
 
-			default: quit = true; break;
+			case '2':
+				payWorker();
+				break;
+
+			case '3':
+				encrypt("JuliusCaesar.txt", "JuliusCaesarEncrypted.txt");
+				break;	
+
+			case '4':
+				decrypt("JuliusCaesarEncrypted.txt", "JuliusCaesarDecrypted.txt");
+				break;
+
+			default: 
+				quit = true;
+				break;
 		}	
 	}
 
@@ -71,5 +88,93 @@ void writeCheck()
 		Check check(name, amount, day, month, year);
 		std::cout << check << std::endl;
 	}
+}
 
+void payWorker()
+{
+	Worker worker;
+
+	std::cout << "Enter your worker's name: " << std::endl;
+	std::cin >> worker.name;
+	
+	char input;
+	bool loop = true;
+
+	while (loop)
+	{
+		std::cout << "Is your worker hourly or salaried (h/s): " << std::endl;
+		std::cin >> input;
+		switch (input)
+		{
+			case 'h':
+				worker.isHourly = true;
+				loop = false;
+				break;
+
+			case 's':
+				worker.isHourly = false;
+				loop = false;
+				break;
+			
+			default:
+				std::cout << "Only 'h' or 's' is accepted!" << std::endl;
+				break;
+		}
+	}
+
+	if (worker.isHourly)
+	{
+		int amount;
+		loop = true;
+		while (loop)
+		{
+			std::cout << "Enter hourly rate: " << std::endl;
+			std::cin >> amount;
+
+			if (amount < 0)
+			{
+				std::cout << "Hourly rate cannot be negative!" <<
+					std::endl;
+			}
+			else
+			{
+				worker.pay.hourly.rate = amount;
+				loop = false;
+			}
+		}
+		
+		loop = true;
+		while (loop)
+		{
+			std::cout << "Enter hours worked: " << std::endl;
+			std::cin >> amount;
+
+			if (amount > 80)
+			{
+				std::cout << "Workers cannot get paid" <<
+				       	" for more than 80 hours!" << std::endl;
+			}
+			else if (amount < 0)
+			{
+				std::cout << "Workers cannot work negative" <<
+					" hours!" << std::endl;
+			}
+			else
+			{
+				worker.pay.hourly.hours = amount;
+				loop = false;
+			}
+		}
+		std::cout << worker.name << " should be paid $" <<
+			(worker.pay.hourly.rate * worker.pay.hourly.hours) <<
+			std::endl;
+	}
+	else
+	{
+		std::cout << "Enter their salary: " << std::endl;
+		std::cin >> worker.pay.salary.salary;
+
+		std::cout << "Enter their bonus: " << std::endl;
+		std::cin >> worker.pay.salary.bonus;
+	}
 }

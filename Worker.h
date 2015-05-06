@@ -7,14 +7,22 @@
 
 typedef struct
 {
-	int val1;
-	int val2;
-} DataElement;
+	std::string name;
+	bool isHourly;
+	union
+	{
+		struct
+		{
+			double rate;
+			double hours;
+		}hourly;
 
-typedef union
-{
-	DataElement de;
-	int val[2];
-} Worker;
+		struct
+		{
+			double salary;
+			double bonus;
+		}salary;
+	}pay;
+}Worker;
 
 #endif
